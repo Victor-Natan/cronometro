@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Plantinha</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="cabecalho">
+    <img src="./img/plantinhaimg.png" alt="imagem plantinha">
+    <h1>Plantinha</h1>
+    <nav class="navbar">
+        <div class="logo"></div>
+        <button class="menu-toggle" id="menu-btn">☰</button>
+        <ul class="nav-links" id="nav-links">
+          <li><a href="index.html">Início</a></li>
+          <li><a href="desenho.html">Desenhos</a></li>
+          <li><a href="diario.html">Diário</a></li>
+          <li><a href="memoria.html">Memória</a></li>
+
+        </ul>
+    </nav>
+  </header>
+  <div class="personalização">
+    <input type="text" id="cor" placeholder="Digite uma cor">
+      <label for="imagem">Ou coloque uma imagem de fundo:</label>
+      <!-- Imagem -->
+      <input type="text" id="imagem" placeholder="Cole uma URL">   
+      <label>ou</label>
+      <!-- Imagem do dispositivo -->
+      <input type="file" id="imagemUpload" accept="image/*">
+  </div> 
+
+  <div class="tempo">
+    <h1 class="titulo__cronometro">Tempo da Plantinha </h1>
+    <div id="cronometro">Carregando...</div>
+  </div>
+
+  
+
+
+  <button id="ativar-pata">🐾 Ativar Pata</button>
+
+  <script type="module" src="./main.js"></script>
+</body>
+</html>

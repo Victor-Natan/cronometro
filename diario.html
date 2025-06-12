@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Diário</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    .menu-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background: #34495e;
+    flex-direction: column;
+    display: none;
+  }
+
+  .nav-links.show {
+    display: flex;
+  }
+
+  .nav-links li {
+    padding: 15px;
+    text-align: center;
+  }
+
+    .entrada {
+      margin-bottom: 40px;
+    }
+    .entrada h3 {
+      margin-bottom: 10px;
+    }
+    .entrada p {
+      white-space: pre-line;
+    }
+    .entrada img {
+      max-width: 300px;
+      display: block;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header class="cabecalho">
+    <img src="./img/plantinhaimg.png" alt="imagem plantinha">
+    <h1>Plantinha</h1>
+    <nav class="navbar">
+        <div class="logo"></div>
+        <button class="menu-toggle" id="menu-btn">☰</button>
+        <ul class="nav-links" id="nav-links">
+          <li><a href="index.html">Início</a></li>
+          <li><a href="desenho.html">Desenhos</a></li>
+          <li><a href="diario.html">Diário</a></li>
+          <li><a href="memoria.html">Memória</a></li>
+
+        </ul>
+    </nav>
+  </header>
+  <h1>Diário</h1>
+
+  <div class="entrada">
+    <h2>Aqui terão nossas histórias</h2>
+    <p>Irei atualizar semanalmente esse diário</p>
+  </div>
+
+    <script type="module" src="./main.js"></script>
+    <script>
+      const menuBtn = document.getElementById("menu-btn");
+const navLinks = document.getElementById("nav-links");
+
+if (menuBtn && navLinks) {
+  menuBtn.addEventListener("click", () => {
+    navLinks.classList.toggle("show");
+  });
+}
+
+    </script>
+
+</body>
+</html>
