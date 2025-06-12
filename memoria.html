@@ -4,158 +4,193 @@
   <meta charset="UTF-8">
   <title>Jogo da Memória</title>
   <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
     body {
       font-family: Arial, sans-serif;
+      margin: 0;
       padding: 20px;
-      background-color: #f4f4f4;
+      background-color: #1c1c1c;
+      color: white;
+    }
+
+    .cabecalho {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #333;
+      padding: 10px 20px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .cabecalho img {
+      width: 50px;
+    }
+
+    .cabecalho h1 {
+      font-size: 28px;
+      margin-left: 10px;
+      color: white;
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+    }
+
+    .menu-toggle {
+      font-size: 24px;
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+
+    .nav-links {
+      list-style: none;
+      margin-left: 10px;
+      display: none;
+      flex-direction: column;
+      background: #444;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .nav-links.show {
+      display: flex;
+    }
+
+    .nav-links li {
+      margin: 5px 0;
+      font-size: 16px;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
     }
 
     h2 {
       text-align: center;
+      margin-top: 20px;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(4, 100px);
+      grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
       gap: 10px;
-      justify-content: center;
       margin-top: 20px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .card {
-      width: 100px;
-      height: 100px;
-      border: 2px solid #000;
+      width: 100%;
+      aspect-ratio: 1/1;
+      border: 2px solid #fff;
       background-color: #ccc;
       background-size: cover;
       background-position: center;
       cursor: pointer;
     }
 
-    .hidden {
-      background-image: none !important;
-    }
-
-    .hidden-content {
-      display: none;
+    .matched {
+      border: 2px solid lime;
     }
   </style>
 </head>
 <body>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-      text-align: center;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(4, 100px);
-      gap: 10px;
-      justify-content: center;
-    }
-    .card {
-      width: 100px;
-      height: 100px;
-      border: 2px solid #000;
-      background-color: #ccc;
-      background-size: cover;
-      background-position: center;
-      cursor: pointer;
-    }
-    .matched {
-      border: 2px solid green;
-    }
-  </style>
-</head>
-<header class="cabecalho">
+  <header class="cabecalho">
     <img src="./img/plantinhaimg.png" alt="imagem plantinha">
     <h1>Plantinha</h1>
     <nav class="navbar">
-        <div class="logo"></div>
         <button class="menu-toggle" id="menu-btn">☰</button>
         <ul class="nav-links" id="nav-links">
           <li><a href="index.html">Início</a></li>
           <li><a href="desenho.html">Desenhos</a></li>
           <li><a href="diario.html">Diário</a></li>
           <li><a href="memoria.html">Memória</a></li>
-
         </ul>
     </nav>
   </header>
 
-<body>
   <h2>Jogo da Memória</h2>
   <p id="tentativas">Movimentos: 0</p>
   <div class="grid" id="tabuleiro"></div>
+
   <script type="module" src="./main.js"></script>
 
   <script>
     let tentativas = 0;
-let firstCard = null;
-let lock = false;
-const menuBtn = document.getElementById("menu-btn");
-const navLinks = document.getElementById("nav-links");
-menuBtn.addEventListener("click", () => {
-navLinks.classList.toggle("show");
-});
+    let firstCard = null;
+    let lock = false;
 
-const imagens = Array.from({length: 8}, (_, i) => `img/img${i+1}.png`);
+    const menuBtn = document.getElementById("menu-btn");
+    const navLinks = document.getElementById("nav-links");
 
-function embaralhar(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-  return array;
-}
-
-function criarTabuleiro() {
-  const tabuleiro = document.getElementById("tabuleiro");
-  const imagensDuplicadas = embaralhar([...imagens, ...imagens]);
-
-  imagensDuplicadas.forEach((imgSrc, index) => {
-    const card = document.createElement("div");
-    card.classList.add("card");
-    card.dataset.img = imgSrc;
-    card.dataset.index = index;
-    card.onclick = () => virarCarta(card);
-    tabuleiro.appendChild(card);
-  });
-}
-
-function virarCarta(card) {
-  if (lock || card.classList.contains("matched") || card.style.backgroundImage) return;
-
-  card.style.backgroundImage = `url(${card.dataset.img})`;
-
-  if (!firstCard) {
-    firstCard = card;
-  } else {
-    tentativas++;
-    document.getElementById("tentativas").innerText = "Movimentos: " + tentativas;
-    lock = true;
-
-    if (firstCard.dataset.img === card.dataset.img) {
-      firstCard.classList.add("matched");
-      card.classList.add("matched");
-      firstCard = null;
-      lock = false;
-    } else {
-      setTimeout(() => {
-        firstCard.style.backgroundImage = "";
-        card.style.backgroundImage = "";
-        firstCard = null;
-        lock = false;
-      }, 800);
+    if (menuBtn && navLinks) {
+      menuBtn.addEventListener("click", () => {
+        navLinks.classList.toggle("show");
+      });
     }
-  }
-}
 
-criarTabuleiro();
+    const imagens = Array.from({length: 10}, (_, i) => `img/img${i+1}.png`);
 
+    function embaralhar(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    function criarTabuleiro() {
+      const tabuleiro = document.getElementById("tabuleiro");
+      const imagensDuplicadas = embaralhar([...imagens, ...imagens]);
+
+      imagensDuplicadas.forEach((imgSrc, index) => {
+        const card = document.createElement("div");
+        card.classList.add("card");
+        card.dataset.img = imgSrc;
+        card.dataset.index = index;
+        card.onclick = () => virarCarta(card);
+        tabuleiro.appendChild(card);
+      });
+    }
+
+    function virarCarta(card) {
+      if (lock || card.classList.contains("matched") || card.style.backgroundImage) return;
+
+      card.style.backgroundImage = `url(${card.dataset.img})`;
+
+      if (!firstCard) {
+        firstCard = card;
+      } else {
+        tentativas++;
+        document.getElementById("tentativas").innerText = "Movimentos: " + tentativas;
+        lock = true;
+
+        if (firstCard.dataset.img === card.dataset.img) {
+          firstCard.classList.add("matched");
+          card.classList.add("matched");
+          firstCard = null;
+          lock = false;
+        } else {
+          setTimeout(() => {
+            firstCard.style.backgroundImage = "";
+            card.style.backgroundImage = "";
+            firstCard = null;
+            lock = false;
+          }, 800);
+        }
+      }
+    }
+
+    criarTabuleiro();
   </script>
 </body>
 </html>

@@ -79,7 +79,7 @@ body{
     font-size: 50px;
   }
 
-form{
+.personalização{
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -88,12 +88,23 @@ form{
     gap: 10px;
     font-size: 36px;
     padding: 0 0 0 24%;
+    gap: 20px;
+}
+
+.personalização label{
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  align-items: center;
+  margin: auto;
 }
 
 input{
     font-size: 36px;
     border-radius: 16px;
     padding: 12px;
+    width: 100%;
+    margin: auto;
 }
 
 button{
@@ -116,6 +127,7 @@ button{
     box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     width: 30%;
     font-size: 36px;
+    margin: 20px 0 0 20px;
 }
 
 .pata {
@@ -143,7 +155,7 @@ button{
     display: flex;
     flex-direction: column;
     text-align: center;
-    margin: 300px 0 0 0;
+    margin: 200px 0 0 0;
 }
 
 .titulo__cronometro{
@@ -157,6 +169,23 @@ button{
 .imagem_casal{
     width: 30%;
     margin: auto;
+}
+
+.desenhos{
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+  margin: 100px 0 0 0;
+}
+
+.desenhos h1{
+  text-align: center;
+}
+
+.desenhos img{
+  border-radius: 20px;
+  width: 80%;
+  margin: auto;
 }
 
 /* Responsivo */
