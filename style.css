@@ -188,6 +188,42 @@ button{
   margin: auto;
 }
 
+.entrada{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin: 100px;
+  gap: 50px;
+}
+
+.entrada h1{
+  font-size: 100px;
+}
+
+.entrada h2{
+  font-size: 35px;
+}
+
+.entrada h3{
+  font-size: 30px;
+}
+
+.historia{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 20px;
+  margin: 100px;
+}
+
+.historia__titulo{
+  font-size: 50px;
+}
+
+.historia__texto{
+  font-size: 35px;
+}
+
 /* Responsivo */
 @media (max-width: 768px) {
 
