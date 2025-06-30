@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Declarações</title>
+    <link rel="stylesheet" href="style.css" />
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background: #34495e;
+        flex-direction: column;
+        display: none;
+      }
+
+      .nav-links.show {
+        display: flex;
+      }
+
+      .nav-links li {
+        padding: 15px;
+        text-align: center;
+      }
+
+      .entrada {
+        margin-bottom: 40px;
+      }
+      .entrada h3 {
+        margin-bottom: 10px;
+      }
+      .entrada p {
+        white-space: pre-line;
+      }
+      .entrada img {
+        max-width: 300px;
+        display: block;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="cabecalho">
+      <img src="./img/plantinhaimg.png" alt="imagem plantinha" />
+      <h1>Plantinha</h1>
+      <nav class="navbar">
+        <div class="logo"></div>
+        <button class="menu-toggle" id="menu-btn">☰</button>
+        <ul class="nav-links" id="nav-links">
+          <li><a href="index.html">Início</a></li>
+          <li><a href="desenho.html">Desenhos</a></li>
+          <li><a href="diario.html">Diário</a></li>
+          <li><a href="memoria.html">Memória</a></li>
+          <li><a href="declaracoes.html">Declarações</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="entrada">
+      <h1>Declarações</h1>
+      <h2>Aqui terão minhas declarações de amor por você</h2>
+      <h3>Irei atualizar quando eu tiver crises de paixão por você</h3>
+    </div>
+
+    <div class="historia">
+      <h1 class="historia__titulo">Eu sou completamente apaixonado</h1>
+      <p class="historia__texto">
+        Meu amor, eu quanto mais te conheço, e quanto mais a gente sai, eu quero viver contigo pela vida toda, eu vejo você e você está espetacularmente linda, eu te escuto e fico admirado por ter uma namorada incrível.
+      </p>
+      <p class="historia__texto">
+        Eu amo como você ama os cachorrinhos, como cuida deles, como se esforça e estuda para salvar todos, e dar a eles uma vida melhor. Eu amo você demais.
+      </p>
+      <p class="historia__texto">
+        
+      </p>
+    </div>
+    
+    <script type="module" src="./main.js"></script>
+    <script>
+      const menuBtn = document.getElementById("menu-btn");
+      const navLinks = document.getElementById("nav-links");
+
+      if (menuBtn && navLinks) {
+        menuBtn.addEventListener("click", () => {
+          navLinks.classList.toggle("show");
+        });
+      }
+    </script>
+  </body>
+</html>
