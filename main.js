@@ -110,15 +110,17 @@ function iniciarCronometro() {
 iniciarCronometro();
 
 function iniciarTemporizador() {
-  // Defina a data alvo: 14 de janeiro de 2026, 01:04 da manhã
   const dataFinal = new Date("2026-01-14T01:04:00");
 
   function atualizarTemporizador() {
     const agora = new Date();
     let diffMs = dataFinal - agora;
 
+    const elemento = document.querySelector(".temporizador"); // pega pelo class
+    if (!elemento) return;
+
     if (diffMs <= 0) {
-      document.getElementById("temporizador").textContent = "Tempo encerrado!";
+      elemento.textContent = "Tempo encerrado!";
       return;
     }
 
@@ -131,12 +133,14 @@ function iniciarTemporizador() {
     minutos %= 60;
     horas %= 24;
 
-    document.getElementById("temporizador").textContent =
+    elemento.textContent =
       `${dias} dias, ${horas} horas, ${minutos} minutos, ${segundos} segundos`;
   }
 
-  setInterval(atualizarTemporizador, 1000);
+  // garante que o cronômetro só começa depois que a página estiver carregada
   atualizarTemporizador();
+  setInterval(atualizarTemporizador, 1000);
 }
 
-iniciarTemporizador();
+// espera o DOM carregar antes de iniciar
+document.addEventListener("DOMContentLoaded", iniciarTemporizador);
