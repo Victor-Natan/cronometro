@@ -108,3 +108,35 @@ function iniciarCronometro() {
 }
 
 iniciarCronometro();
+
+function iniciarTemporizador() {
+  // Defina a data alvo: 14 de janeiro de 2026, 01:04 da manhã
+  const dataFinal = new Date("2026-01-14T01:04:00");
+
+  function atualizarTemporizador() {
+    const agora = new Date();
+    let diffMs = dataFinal - agora;
+
+    if (diffMs <= 0) {
+      document.getElementById("temporizador").textContent = "Tempo encerrado!";
+      return;
+    }
+
+    let segundos = Math.floor(diffMs / 1000);
+    let minutos = Math.floor(segundos / 60);
+    let horas = Math.floor(minutos / 60);
+    let dias = Math.floor(horas / 24);
+
+    segundos %= 60;
+    minutos %= 60;
+    horas %= 24;
+
+    document.getElementById("temporizador").textContent =
+      `${dias} dias, ${horas} horas, ${minutos} minutos, ${segundos} segundos`;
+  }
+
+  setInterval(atualizarTemporizador, 1000);
+  atualizarTemporizador();
+}
+
+iniciarTemporizador();
