@@ -342,3 +342,93 @@ body.modo-festa {
     text-align: center;
   }
 }
+
+/* =====================================================
+   RESPONSIVO MOBILE — iPhone & Samsung
+===================================================== */
+@media (max-width: 768px) {
+
+  body {
+    height: auto;
+    overflow-x: hidden;
+  }
+
+  /* ================= HEADER ================= */
+  .cabecalho {
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 12px;
+  }
+
+  .cabecalho img {
+    width: 42px;
+  }
+
+  .cabecalho h1 {
+    font-size: 22px;
+    margin: 0;
+  }
+
+  #link-recordacao-1ano {
+    font-size: 18px;
+    margin: 5px 0;
+  }
+
+  /* ================= MENU ================= */
+  .menu-toggle {
+    font-size: 32px;
+  }
+
+  .nav-links {
+    top: 70px;
+  }
+
+  .nav-links li a {
+    font-size: 24px;
+  }
+
+  /* ================= CONTEÚDO ================= */
+  .remember {
+    margin: 20px;
+    padding: 20px;
+    gap: 16px;
+  }
+
+  .remember img {
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+  }
+
+  .historia__titulo {
+    font-size: 28px;
+  }
+
+  .historia__texto {
+    font-size: 18px;
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+}
+
+/* =====================================================
+   MOBILE MUITO PEQUENO (iPhone SE, Android compacto)
+===================================================== */
+@media (max-width: 400px) {
+
+  .cabecalho h1 {
+    font-size: 20px;
+  }
+
+  .historia__titulo {
+    font-size: 24px;
+  }
+
+  .historia__texto {
+    font-size: 16px;
+  }
+
+  .nav-links li a {
+    font-size: 20px;
+  }
+}
