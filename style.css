@@ -64,6 +64,16 @@ body{
     display: none;
   }
 
+  .bloqueado {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.liberado {
+  visibility: visible;
+  pointer-events: auto;
+}
+
   .nav-links.show {
     display: flex;
   }
@@ -77,6 +87,13 @@ body{
     text-decoration: none;
     color: aliceblue;
     font-size: 50px;
+  }
+
+  #link-recordacao-1ano{
+    font-size: 36px;
+    color: var(--cor-do-texto);
+    text-decoration: none;
+    padding: 0 10px 0 0;
   }
 
 .personalização{
@@ -236,6 +253,16 @@ background-image: url("./img/notebook-paper-background-q9ux3ewql4qxfk50.jpg");
   color: #000;
   padding: 40px;
 }
+.remember{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 20px;
+  margin: 100px;
+background-image: url("./img/1716511760.webp");
+  color: #000;
+  padding: 40px;
+}
 
 .historia__titulo{
   font-size: 50px;
@@ -246,6 +273,48 @@ background-image: url("./img/notebook-paper-background-q9ux3ewql4qxfk50.jpg");
   margin: 0 0 50px 0;
   font-family: cursive;
 }
+
+/* ===============================
+   MODO FESTA 🎉
+================================ */
+
+body.modo-festa {
+  animation: brilhoFesta 3s infinite alternate;
+}
+
+@keyframes brilhoFesta {
+  0%   { filter: brightness(1); }
+  100% { filter: brightness(1.2); }
+}
+
+.confete {
+  position: fixed;
+  top: -10px;
+  width: 20px;
+  height: 40px;
+  background-color: red;
+  z-index: 9999;
+
+  animation-name: cair;
+  animation-duration: 10000s;        /* ✅ ESSENCIAL */
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+
+@keyframes cair {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(320vh);
+    opacity: 0;
+  }
+}
+
+
+
 
 /* Responsivo */
 @media (max-width: 768px) {
