@@ -1,0 +1,86 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum UserRole {
+  ADMIN
+}
+
+enum ContentStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+model AdminUser {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  role         UserRole @default(ADMIN)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Module {
+  id          String         @id @default(cuid())
+  name        String
+  slug        String         @unique
+  description String?
+  isActive    Boolean        @default(true)
+  order       Int            @default(0)
+  entries     ContentEntry[]
+  media       MediaAsset[]
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+}
+
+model ContentEntry {
+  id           String        @id @default(cuid())
+  moduleId     String
+  module       Module        @relation(fields: [moduleId], references: [id])
+  title        String
+  slug         String
+  summary      String?
+  body         String?
+  coverImageUrl String?
+  eventDate    DateTime?
+  status       ContentStatus @default(DRAFT)
+  order        Int           @default(0)
+  isFeatured   Boolean       @default(false)
+  media        MediaAsset[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  deletedAt    DateTime?
+
+  @@unique([moduleId, slug])
+}
+
+model MediaAsset {
+  id             String        @id @default(cuid())
+  title          String?
+  description    String?
+  url            String
+  altText        String?
+  fileName       String?
+  mimeType       String?
+  size           Int?
+  moduleId       String?
+  contentEntryId String?
+  module         Module?       @relation(fields: [moduleId], references: [id])
+  contentEntry   ContentEntry? @relation(fields: [contentEntryId], references: [id])
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+}
+
+model SiteConfig {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
