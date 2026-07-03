@@ -1,3 +1,6 @@
 {
-  "root": "plantinha-next"
+  "framework": "nextjs",
+  "installCommand": "cd plantinha-next && npm install",
+  "buildCommand": "cd plantinha-next && npm run build",
+  "outputDirectory": "plantinha-next/.next"
 }
