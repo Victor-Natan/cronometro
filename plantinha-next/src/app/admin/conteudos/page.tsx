@@ -5,13 +5,35 @@ import AdminContentRowActions from "@/components/AdminContentRowActions";
 export const dynamic = "force-dynamic";
 
 export default async function AdminConteudosPage() {
-  const conteudos = await prisma.contentEntry.findMany({
-    where: {
-      deletedAt: null,
-    },
-    include: { module: true },
-    orderBy: { createdAt: "desc" },
-  });
+  const conteudos = await (async () => {
+    try {
+      return await prisma.contentEntry.findMany({
+        where: {
+          deletedAt: null,
+        },
+        include: { module: true },
+        orderBy: { createdAt: "desc" },
+      });
+    } catch {
+      return null;
+    }
+  })();
+
+  if (!conteudos) {
+    return (
+      <div className="min-h-screen bg-slate-100 text-slate-900">
+        <main className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
+          <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
+            <h1 className="text-3xl font-semibold">Gerenciar Conteúdos</h1>
+            <p className="mt-3 text-slate-600">Conteúdo temporariamente indisponível. Tente novamente em instantes.</p>
+            <Link href="/admin/conteudos/novo" className="mt-6 inline-flex rounded-2xl bg-sky-700 px-5 py-3 text-white transition hover:bg-sky-800">
+              Novo conteúdo
+            </Link>
+          </div>
+        </main>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-slate-100 text-slate-900">

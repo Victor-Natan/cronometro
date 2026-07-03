@@ -1,16 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
-import { mkdir, writeFile } from 'node:fs/promises';
-import path from 'node:path';
-import { randomUUID } from 'node:crypto';
 import { verifyToken } from '@/lib/auth';
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024;
-
-function getFileExtension(fileName: string) {
-  const ext = path.extname(fileName || '').toLowerCase();
-  return ext || '.png';
-}
 
 async function ensureAuthenticated() {
   const cookieStore = await cookies();
@@ -38,9 +30,6 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Nenhuma imagem enviada.' }, { status: 400 });
     }
 
-    const uploadDir = path.join(process.cwd(), 'public', 'uploads');
-    await mkdir(uploadDir, { recursive: true });
-
     const urls: string[] = [];
 
     for (const file of files) {
@@ -55,13 +44,8 @@ export async function POST(request: NextRequest) {
         );
       }
 
-      const ext = getFileExtension(file.name);
-      const fileName = `${Date.now()}-${randomUUID()}${ext}`;
-      const absolutePath = path.join(uploadDir, fileName);
       const buffer = Buffer.from(await file.arrayBuffer());
-
-      await writeFile(absolutePath, buffer);
-      urls.push(`/uploads/${fileName}`);
+      urls.push(`data:${file.type};base64,${buffer.toString('base64')}`);
     }
 
     return NextResponse.json({ urls }, { status: 201 });

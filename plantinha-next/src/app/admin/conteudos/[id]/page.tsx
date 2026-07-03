@@ -56,23 +56,15 @@ export default function AdminEditarConteudoPage() {
       return [] as string[];
     }
 
-    const uploadFormData = new FormData();
-    for (const file of files) {
-      uploadFormData.append('files', file);
-    }
+    const convertFileToDataUrl = (file: File) =>
+      new Promise<string>((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(String(reader.result || ''));
+        reader.onerror = () => reject(new Error('Falha ao ler a imagem'));
+        reader.readAsDataURL(file);
+      });
 
-    const uploadResponse = await fetch('/api/admin/upload', {
-      method: 'POST',
-      body: uploadFormData,
-    });
-
-    if (!uploadResponse.ok) {
-      const data = await uploadResponse.json().catch(() => null);
-      throw new Error(data?.error || 'Falha ao enviar imagens');
-    }
-
-    const uploadData = await uploadResponse.json();
-    return Array.isArray(uploadData.urls) ? uploadData.urls : [];
+    return Promise.all(files.map((file) => convertFileToDataUrl(file)));
   }
 
   useEffect(() => {
