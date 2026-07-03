@@ -20,8 +20,7 @@ async function verifyFallbackCredentials(email: string, password: string) {
     return null;
   }
 
-  const isValid = await bcrypt.compare(password, DEFAULT_ADMIN_PASSWORD);
-  if (!isValid) {
+  if (password !== DEFAULT_ADMIN_PASSWORD) {
     return null;
   }
 
